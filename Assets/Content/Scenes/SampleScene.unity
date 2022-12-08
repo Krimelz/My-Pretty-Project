@@ -477,7 +477,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 723670757}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.36, z: 0}
+  m_LocalPosition: {x: 0, y: -0.252, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -657,7 +657,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2142403855}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.799, z: 0}
+  m_LocalPosition: {x: 0, y: 1.833, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -731,17 +731,17 @@ MonoBehaviour:
       m_Flags: 0
     m_Reference: {fileID: -3920858248801119304, guid: 68ceda8a764991c45af269669d47d8b0,
       type: 3}
-  movementSpeed: 5
-  jumpForce: 10
+  movementSpeed: 25
+  jumpForce: 3
   playerCamera: {fileID: 330585545}
   minAngle: -86
   maxAngle: 86
   origin: {fileID: 723670758}
-  radius: 0.3
-  maxDistance: 0.2
+  radius: 0.45
   layerMask:
     serializedVersion: 2
     m_Bits: 8
+  fps: 10
 --- !u!54 &2142403858
 Rigidbody:
   m_ObjectHideFlags: 0

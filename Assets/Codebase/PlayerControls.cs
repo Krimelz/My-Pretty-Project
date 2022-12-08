@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.Rendering;
 using UnityEngine.InputSystem;
 
 public class PlayerControls : MonoBehaviour
@@ -26,19 +27,18 @@ public class PlayerControls : MonoBehaviour
 	private float minAngle = -87f;
 	[SerializeField]
 	private float maxAngle = 87f;
-
-	private Vector3 movementDirection;
-	private float rotX;
-	private float rotY;
-	private Rigidbody rbody;
 	[SerializeField]
 	private Transform origin;
 	[SerializeField]
 	private float radius;
 	[SerializeField]
-	private float maxDistance;
-	[SerializeField]
 	private LayerMask layerMask;
+
+	private Rigidbody rbody;
+	private Vector3 movementDirection;
+	private float rotX;
+	private float rotY;
+	[SerializeField]private int fps;
 
 	private void OnEnable()
 	{
@@ -106,17 +106,15 @@ public class PlayerControls : MonoBehaviour
 
 	private void Move()
 	{
-		//transform.Translate(movementDirection * Time.deltaTime * movementSpeed, Space.Self);
-
-		rbody.AddRelativeForce(movementDirection, ForceMode.VelocityChange);
+		Application.targetFrameRate = fps;
+		var direction = movementDirection * movementSpeed * Time.fixedDeltaTime;
+		rbody.AddRelativeForce(direction, ForceMode.VelocityChange);
 	}
 
 	private void Jump()
 	{
-		Debug.Log(layerMask.value);
-		if (Physics.SphereCast(origin.position, radius, -transform.up, out RaycastHit hit, maxDistance, layerMask.value))
+		if (Physics.CheckSphere(origin.position, radius, layerMask.value))
 		{
-			Debug.Log(2);
 			rbody.AddRelativeForce(Vector3.up * jumpForce, ForceMode.Impulse);
 		}
 	}
@@ -142,7 +140,6 @@ public class PlayerControls : MonoBehaviour
 	private void OnDrawGizmos()
 	{
 		Gizmos.color = Color.green;
-		Gizmos.DrawRay(origin.position, -transform.up * maxDistance);
 		Gizmos.DrawWireSphere(origin.position, radius);
 	}
 }
