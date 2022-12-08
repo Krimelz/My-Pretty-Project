@@ -23,13 +23,22 @@ public class PlayerControls : MonoBehaviour
 	[SerializeField]
 	private Camera playerCamera;
 	[SerializeField]
-	[Range(0f, 90f)]
-	private float minAngle;
+	private float minAngle = -87f;
 	[SerializeField]
-	[Range(0f, 90f)]
-	private float maxAngle;
+	private float maxAngle = 87f;
 
 	private Vector3 movementDirection;
+	private float rotX;
+	private float rotY;
+	private Rigidbody rbody;
+	[SerializeField]
+	private Transform origin;
+	[SerializeField]
+	private float radius;
+	[SerializeField]
+	private float maxDistance;
+	[SerializeField]
+	private LayerMask layerMask;
 
 	private void OnEnable()
 	{
@@ -58,7 +67,15 @@ public class PlayerControls : MonoBehaviour
 		look.action.Disable();
 	}
 
-	private void Update()
+	private void Start()
+	{
+		rotX = 0f;
+		rotY = 0f;
+
+		rbody = GetComponent<Rigidbody>();
+	}
+
+	private void FixedUpdate()
 	{
 		if (move.action.IsPressed())
 		{
@@ -89,30 +106,43 @@ public class PlayerControls : MonoBehaviour
 
 	private void Move()
 	{
-		transform.Translate(movementDirection * Time.deltaTime * movementSpeed, Space.Self);
+		//transform.Translate(movementDirection * Time.deltaTime * movementSpeed, Space.Self);
+
+		rbody.AddRelativeForce(movementDirection, ForceMode.VelocityChange);
 	}
 
 	private void Jump()
 	{
-		
+		Debug.Log(layerMask.value);
+		if (Physics.SphereCast(origin.position, radius, -transform.up, out RaycastHit hit, maxDistance, layerMask.value))
+		{
+			Debug.Log(2);
+			rbody.AddRelativeForce(Vector3.up * jumpForce, ForceMode.Impulse);
+		}
 	}
 
 	private void Look(Vector2 delta)
 	{
 		delta *= Time.deltaTime * 10f;
 
-		var xRot = playerCamera.transform.localRotation.eulerAngles.x;
-		var yRot = transform.localRotation.eulerAngles.y;
+		rotX -= delta.y;
+		rotY += delta.x;
 
-		var newXRot = xRot - delta.y;
-		var newYRot = yRot + delta.x;
+		rotX = Mathf.Clamp(rotX, minAngle, maxAngle);
 
-		playerCamera.transform.localRotation = Quaternion.Euler(newXRot, 0f, 0f);
-		transform.localRotation = Quaternion.Euler(0f, newYRot, 0f);
+		transform.localRotation = Quaternion.Euler(0f, rotY, 0f);
+		playerCamera.transform.localRotation = Quaternion.Euler(rotX, 0f, 0f);
 	}
 
 	private void Fire()
 	{
 
+	}
+
+	private void OnDrawGizmos()
+	{
+		Gizmos.color = Color.green;
+		Gizmos.DrawRay(origin.position, -transform.up * maxDistance);
+		Gizmos.DrawWireSphere(origin.position, radius);
 	}
 }
