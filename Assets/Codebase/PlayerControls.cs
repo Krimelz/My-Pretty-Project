@@ -38,7 +38,6 @@ public class PlayerControls : MonoBehaviour
 	private Vector3 movementDirection;
 	private float rotX;
 	private float rotY;
-	[SerializeField]private int fps;
 
 	private void OnEnable()
 	{
@@ -106,7 +105,6 @@ public class PlayerControls : MonoBehaviour
 
 	private void Move()
 	{
-		Application.targetFrameRate = fps;
 		var direction = movementDirection * movementSpeed * Time.fixedDeltaTime;
 		rbody.AddRelativeForce(direction, ForceMode.VelocityChange);
 	}
