@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Experimental.Rendering;
 using UnityEngine.InputSystem;
 
 public class PlayerControls : MonoBehaviour
@@ -20,6 +17,12 @@ public class PlayerControls : MonoBehaviour
 	[Header("Jump")]
 	[SerializeField]
 	private float jumpForce;
+	[SerializeField]
+	private LayerMask layerMask;
+	[SerializeField]
+	private Transform groundChecker;
+	[SerializeField]
+	private float radius;
 	[Header("Look")]
 	[SerializeField]
 	private Camera playerCamera;
@@ -27,17 +30,11 @@ public class PlayerControls : MonoBehaviour
 	private float minAngle = -87f;
 	[SerializeField]
 	private float maxAngle = 87f;
-	[SerializeField]
-	private Transform origin;
-	[SerializeField]
-	private float radius;
-	[SerializeField]
-	private LayerMask layerMask;
 
 	private Rigidbody rbody;
 	private Vector3 movementDirection;
-	private float rotX;
-	private float rotY;
+	private float rotationX;
+	private float rotationY;
 
 	private void OnEnable()
 	{
@@ -68,8 +65,8 @@ public class PlayerControls : MonoBehaviour
 
 	private void Start()
 	{
-		rotX = 0f;
-		rotY = 0f;
+		rotationX = 0f;
+		rotationY = 0f;
 
 		rbody = GetComponent<Rigidbody>();
 	}
@@ -111,7 +108,7 @@ public class PlayerControls : MonoBehaviour
 
 	private void Jump()
 	{
-		if (Physics.CheckSphere(origin.position, radius, layerMask.value))
+		if (Physics.CheckSphere(groundChecker.position, radius, layerMask.value))
 		{
 			rbody.AddRelativeForce(Vector3.up * jumpForce, ForceMode.Impulse);
 		}
@@ -121,13 +118,13 @@ public class PlayerControls : MonoBehaviour
 	{
 		delta *= Time.deltaTime * 10f;
 
-		rotX -= delta.y;
-		rotY += delta.x;
+		rotationX -= delta.y;
+		rotationY += delta.x;
 
-		rotX = Mathf.Clamp(rotX, minAngle, maxAngle);
+		rotationX = Mathf.Clamp(rotationX, minAngle, maxAngle);
 
-		transform.localRotation = Quaternion.Euler(0f, rotY, 0f);
-		playerCamera.transform.localRotation = Quaternion.Euler(rotX, 0f, 0f);
+		transform.localRotation = Quaternion.Euler(0f, rotationY, 0f);
+		playerCamera.transform.localRotation = Quaternion.Euler(rotationX, 0f, 0f);
 	}
 
 	private void Fire()
@@ -138,6 +135,6 @@ public class PlayerControls : MonoBehaviour
 	private void OnDrawGizmos()
 	{
 		Gizmos.color = Color.green;
-		Gizmos.DrawWireSphere(origin.position, radius);
+		Gizmos.DrawWireSphere(groundChecker.position, radius);
 	}
 }
