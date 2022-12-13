@@ -16,13 +16,7 @@ public class PlayerControls : MonoBehaviour
 	private float movementSpeed;
 	[Header("Jump")]
 	[SerializeField]
-	private float jumpForce;
-	[SerializeField]
-	private LayerMask layerMask;
-	[SerializeField]
-	private Transform groundChecker;
-	[SerializeField]
-	private float radius;
+	private float jumpHeight;
 	[Header("Look")]
 	[SerializeField]
 	private Camera playerCamera;
@@ -31,8 +25,9 @@ public class PlayerControls : MonoBehaviour
 	[SerializeField]
 	private float maxAngle = 87f;
 
-	private Rigidbody rbody;
+	private CharacterController character;
 	private Vector3 movementDirection;
+	private Vector3 velocity;
 	private float rotationX;
 	private float rotationY;
 
@@ -42,7 +37,7 @@ public class PlayerControls : MonoBehaviour
 		move.action.performed += OnMovePreformed;
 
 		jump.action.Enable();
-		jump.action.performed += OnJumpPerformed;
+		//jump.action.performed += OnJumpPerformed;
 
 		look.action.Enable();
 		look.action.performed += OnLookPerformed;
@@ -56,27 +51,45 @@ public class PlayerControls : MonoBehaviour
 		move.action.performed -= OnMovePreformed;
 		move.action.Disable();
 
-		jump.action.performed -= OnJumpPerformed;
+		//jump.action.performed -= OnJumpPerformed;
 		jump.action.Disable();
 
 		look.action.performed -= OnLookPerformed;
 		look.action.Disable();
+
+		fire.action.performed -= OnFirePerformed;
+		fire.action.Disable();
+	}
+
+	private void Awake()
+	{
+		character = GetComponent<CharacterController>();
 	}
 
 	private void Start()
 	{
 		rotationX = 0f;
 		rotationY = 0f;
-
-		rbody = GetComponent<Rigidbody>();
 	}
 
-	private void FixedUpdate()
+	private void Update()
 	{
 		if (move.action.IsPressed())
 		{
 			Move();
 		}
+
+		if (jump.action.IsPressed())
+		{
+			Jump();
+		}
+
+		if (character.isGrounded && velocity.y < 0)
+		{
+			velocity.y = 0f;
+		}
+
+		Gravity();
 	}
 
 	private void OnMovePreformed(InputAction.CallbackContext context)
@@ -102,15 +115,19 @@ public class PlayerControls : MonoBehaviour
 
 	private void Move()
 	{
-		var direction = movementDirection * movementSpeed * Time.fixedDeltaTime;
-		rbody.AddRelativeForce(direction, ForceMode.VelocityChange);
+		Vector3 forward = transform.TransformDirection(Vector3.forward);
+		Vector3 right = transform.TransformDirection(Vector3.right);
+		Vector3 motion = (right * movementDirection.x) + (forward * movementDirection.z);
+		motion *= movementSpeed * Time.deltaTime;
+
+		character.Move(motion);
 	}
 
 	private void Jump()
 	{
-		if (Physics.CheckSphere(groundChecker.position, radius, layerMask.value))
+		if (character.isGrounded)
 		{
-			rbody.AddRelativeForce(Vector3.up * jumpForce, ForceMode.Impulse);
+			velocity.y += Mathf.Sqrt(-jumpHeight * Physics.gravity.y);
 		}
 	}
 
@@ -129,12 +146,12 @@ public class PlayerControls : MonoBehaviour
 
 	private void Fire()
 	{
-
+		Debug.Log("Fire!");
 	}
 
-	private void OnDrawGizmos()
+	private void Gravity()
 	{
-		Gizmos.color = Color.green;
-		Gizmos.DrawWireSphere(groundChecker.position, radius);
+		velocity.y += Physics.gravity.y * Time.deltaTime;
+		character.Move(velocity * Time.deltaTime);
 	}
 }

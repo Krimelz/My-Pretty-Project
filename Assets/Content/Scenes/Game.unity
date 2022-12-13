@@ -920,6 +920,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 9146923941039909458, guid: fb97514de0f7d89449826c69e887c99c,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.733
+      objectReference: {fileID: 0}
     - target: {fileID: 9146923942322307492, guid: fb97514de0f7d89449826c69e887c99c,
         type: 3}
       propertyPath: m_RootOrder
@@ -933,7 +938,7 @@ PrefabInstance:
     - target: {fileID: 9146923942322307492, guid: fb97514de0f7d89449826c69e887c99c,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9146923942322307492, guid: fb97514de0f7d89449826c69e887c99c,
         type: 3}
@@ -979,16 +984,6 @@ PrefabInstance:
         type: 3}
       propertyPath: jumpForce
       value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 9146923942322307493, guid: fb97514de0f7d89449826c69e887c99c,
-        type: 3}
-      propertyPath: movementSpeed
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 9146923942322307494, guid: fb97514de0f7d89449826c69e887c99c,
-        type: 3}
-      propertyPath: m_Drag
-      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 9146923942322307515, guid: fb97514de0f7d89449826c69e887c99c,
         type: 3}

@@ -5690,6 +5690,16 @@
             <param name="wide">If set to <c>true</c> the message box will be wide.</param>
             <returns>State of isFolded.</returns>
         </member>
+        <member name="M:Sirenix.Utilities.Editor.SirenixEditorGUI.IconMessageBox(System.String,Sirenix.OdinInspector.SdfIconType,System.Nullable{UnityEngine.Color},UnityEngine.GUIStyle,System.Action{UnityEditor.GenericMenu})">
+            <summary>
+            Draws a message box with the specified icon.
+            </summary>
+            <param name="message">The message to be displayed.</param>
+            <param name="iconType">The icon to be displayed.</param>
+            <param name="color">The color of the icon.</param>
+            <param name="messageBoxStyle">The style of the message box.</param>
+            <param name="onContextClick">The action to be invoked if the message box is right-clicked.</param>
+        </member>
         <member name="M:Sirenix.Utilities.Editor.SirenixEditorGUI.HorizontalLineSeparator(System.Int32)">
             <summary>
             Draws a horizontal line separator.
@@ -7970,6 +7980,13 @@
             </summary>
         </member>
         <member name="M:Sirenix.OdinInspector.Editor.UnityEditorEventUtility.DelayAction(System.Action)">
+            <summary>
+            Sometimes, an idiot overrides a delay action subscription to <see cref="F:UnityEditor.EditorApplication.delayCall"/>,
+            which can be done because the people at Unity didn't know what events were once upon a time.
+            This method subscribes to a lot of different callbacks, in the hopes of catching at least one.
+            </summary>
+        </member>
+        <member name="M:Sirenix.OdinInspector.Editor.UnityEditorEventUtility.DelayAction(System.Action,System.Boolean)">
             <summary>
             Sometimes, an idiot overrides a delay action subscription to <see cref="F:UnityEditor.EditorApplication.delayCall"/>,
             which can be done because the people at Unity didn't know what events were once upon a time.

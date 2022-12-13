@@ -2131,6 +2131,16 @@
             When <c>true</c> the InfoBox will ignore the GUI.enable flag and always draw as enabled.
             </summary>
         </member>
+        <member name="P:Sirenix.OdinInspector.InfoBoxAttribute.Icon">
+            <summary>
+            The icon to be displayed next to the message.
+            </summary>
+        </member>
+        <member name="F:Sirenix.OdinInspector.InfoBoxAttribute.IconColor">
+            <summary>
+            The color of the icon.
+            </summary>
+        </member>
         <member name="M:Sirenix.OdinInspector.InfoBoxAttribute.#ctor(System.String,Sirenix.OdinInspector.InfoMessageType,System.String)">
             <summary>
             Displays an info box above the property.
@@ -2144,6 +2154,14 @@
             Displays an info box above the property.
             </summary>
             <param name="message">The message for the message box. Supports referencing a member string field, property or method by using $.</param>
+            <param name="visibleIfMemberName">Name of member bool to show or hide the message box.</param>
+        </member>
+        <member name="M:Sirenix.OdinInspector.InfoBoxAttribute.#ctor(System.String,Sirenix.OdinInspector.SdfIconType,System.String)">
+            <summary>
+            Displays an info box above the property.
+            </summary>
+            <param name="message">The message for the message box. Supports referencing a member string field, property or method by using $.</param>
+            <param name="icon">The icon to be displayed next to the message.</param>
             <param name="visibleIfMemberName">Name of member bool to show or hide the message box.</param>
         </member>
         <member name="T:Sirenix.OdinInspector.InlineButtonAttribute">
@@ -2395,8 +2413,18 @@
         <member name="F:Sirenix.OdinInspector.LabelTextAttribute.NicifyText">
             <summary>
             Whether the label text should be nicified before it is displayed, IE, "m_someField" becomes "Some Field".
-            If the label text is resolved via a member reference, an expression, or the like, then the evaluated result 
+            If the label text is resolved via a member reference, an expression, or the like, then the evaluated result
             of that member reference or expression will be nicified.
+            </summary>
+        </member>
+        <member name="P:Sirenix.OdinInspector.LabelTextAttribute.Icon">
+            <summary>
+            The icon to be displayed.
+            </summary>
+        </member>
+        <member name="F:Sirenix.OdinInspector.LabelTextAttribute.IconColor">
+            <summary>
+            The color of the icon.
             </summary>
         </member>
         <member name="M:Sirenix.OdinInspector.LabelTextAttribute.#ctor(System.String)">
@@ -2411,6 +2439,21 @@
             </summary>
             <param name="text">The new text of the label.</param>
             <param name="nicifyText">Whether to nicify the label text.</param>
+        </member>
+        <member name="M:Sirenix.OdinInspector.LabelTextAttribute.#ctor(System.String,Sirenix.OdinInspector.SdfIconType)">
+            <summary>
+            Give a property a custom label with a custom icon.
+            </summary>
+            <param name="text">The new text of the label.</param>
+            <param name="icon">The icon to be displayed.</param>
+        </member>
+        <member name="M:Sirenix.OdinInspector.LabelTextAttribute.#ctor(System.String,System.Boolean,Sirenix.OdinInspector.SdfIconType)">
+            <summary>
+            Give a property a custom label with a custom icon.
+            </summary>
+            <param name="text">The new text of the label.</param>
+            <param name="nicifyText">Whether to nicify the label text.</param>
+            <param name="icon">The icon to be displayed.</param>
         </member>
         <member name="T:Sirenix.OdinInspector.LabelWidthAttribute">
             <summary>
@@ -4367,11 +4410,24 @@
             If <c>true</c> the suffix label will be drawn on top of the property, instead of after.
             </summary>
         </member>
+        <member name="P:Sirenix.OdinInspector.SuffixLabelAttribute.Icon">
+            <summary>
+            The icon to be displayed.
+            </summary>
+        </member>
         <member name="M:Sirenix.OdinInspector.SuffixLabelAttribute.#ctor(System.String,System.Boolean)">
             <summary>
             Draws a label at the end of the property.
             </summary>
             <param name="label">The text of the label.</param>
+            <param name="overlay">If <c>true</c> the suffix label will be drawn on top of the property, instead of after.</param>
+        </member>
+        <member name="M:Sirenix.OdinInspector.SuffixLabelAttribute.#ctor(System.String,Sirenix.OdinInspector.SdfIconType,System.Boolean)">
+            <summary>
+            Draws a label at the end of the property.
+            </summary>
+            <param name="label">The text of the label.</param>
+            <param name="icon">The icon to be displayed.</param>
             <param name="overlay">If <c>true</c> the suffix label will be drawn on top of the property, instead of after.</param>
         </member>
         <member name="T:Sirenix.OdinInspector.SuppressInvalidAttributeErrorAttribute">
