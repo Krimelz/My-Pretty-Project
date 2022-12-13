@@ -1,9 +1,11 @@
-using UnityEngine;
 using Zenject;
 
-public class BootInstaller : MonoInstaller
+namespace Codebase.Installers
 {
-    public override void InstallBindings()
+    public class BootInstaller : MonoInstaller
     {
+        public override void InstallBindings()
+        {
+        }
     }
 }

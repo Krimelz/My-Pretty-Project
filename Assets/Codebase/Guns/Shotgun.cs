@@ -1,4 +1,4 @@
-﻿namespace Assets.Codebase.Guns
+﻿namespace Codebase.Guns
 {
 	public class Shotgun : Gun
 	{

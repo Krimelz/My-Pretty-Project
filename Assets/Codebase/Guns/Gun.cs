@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Assets.Codebase.Guns
+namespace Codebase.Guns
 {
 	public abstract class Gun : MonoBehaviour, IGun
 	{

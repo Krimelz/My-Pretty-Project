@@ -1,15 +1,18 @@
 using UnityEngine;
 using Zenject;
 
-public class PlayerInstaller : MonoInstaller
+namespace Codebase.Installers
 {
-    [SerializeField]
-    private GameObject playerPrefab;
-    [SerializeField]
-    private Transform spawnPoint;
-
-    public override void InstallBindings()
+    public class PlayerInstaller : MonoInstaller
     {
-        Container.InstantiatePrefab(playerPrefab, spawnPoint.position, Quaternion.identity, null);
+        [SerializeField]
+        private GameObject playerPrefab;
+        [SerializeField]
+        private Transform spawnPoint;
+    
+        public override void InstallBindings()
+        {
+            Container.InstantiatePrefab(playerPrefab, spawnPoint.position, Quaternion.identity, null);
+        }
     }
 }
