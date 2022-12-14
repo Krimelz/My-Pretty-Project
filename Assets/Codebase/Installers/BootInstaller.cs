@@ -1,11 +1,22 @@
+using Codebase.Controls;
+using UnityEngine;
 using Zenject;
 
 namespace Codebase.Installers
 {
     public class BootInstaller : MonoInstaller
     {
+        [SerializeField] 
+        private InputService inputServicePrefab;
+
         public override void InstallBindings()
         {
+            Container
+                .Bind<IInputService>()
+                .To<InputService>()
+                .FromComponentInNewPrefab(inputServicePrefab)
+                .AsSingle()
+                .NonLazy();
         }
     }
 }

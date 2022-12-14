@@ -210,8 +210,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9146923942322307492}
-  - component: {fileID: 9146923942322307493}
   - component: {fileID: 643188641334919865}
+  - component: {fileID: 5207310512466168424}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -236,75 +236,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &9146923942322307493
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9146923942322307515}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 682d0750a49102e4db120a1ce909983e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  move:
-    m_UseReference: 1
-    m_Action:
-      m_Name: Move
-      m_Type: 0
-      m_ExpectedControlType: 
-      m_Id: a903a61b-6830-4cfe-a222-56194d3b8a10
-      m_Processors: 
-      m_Interactions: 
-      m_SingletonActionBindings: []
-      m_Flags: 0
-    m_Reference: {fileID: 1592368865864050553, guid: 68ceda8a764991c45af269669d47d8b0,
-      type: 3}
-  jump:
-    m_UseReference: 1
-    m_Action:
-      m_Name: Jump
-      m_Type: 0
-      m_ExpectedControlType: 
-      m_Id: 4424d5ac-8e18-4e1d-98fe-7a991ab83c00
-      m_Processors: 
-      m_Interactions: 
-      m_SingletonActionBindings: []
-      m_Flags: 0
-    m_Reference: {fileID: 7954485472213089294, guid: 68ceda8a764991c45af269669d47d8b0,
-      type: 3}
-  look:
-    m_UseReference: 1
-    m_Action:
-      m_Name: Look
-      m_Type: 0
-      m_ExpectedControlType: 
-      m_Id: a1647764-b729-4fa0-846b-3459fb8fb8d4
-      m_Processors: 
-      m_Interactions: 
-      m_SingletonActionBindings: []
-      m_Flags: 0
-    m_Reference: {fileID: -4330172932815528971, guid: 68ceda8a764991c45af269669d47d8b0,
-      type: 3}
-  fire:
-    m_UseReference: 1
-    m_Action:
-      m_Name: Fire
-      m_Type: 0
-      m_ExpectedControlType: 
-      m_Id: 7fc82691-7f55-4e0c-b770-723aba34966d
-      m_Processors: 
-      m_Interactions: 
-      m_SingletonActionBindings: []
-      m_Flags: 0
-    m_Reference: {fileID: -3920858248801119304, guid: 68ceda8a764991c45af269669d47d8b0,
-      type: 3}
-  movementSpeed: 10
-  jumpHeight: 5
-  playerCamera: {fileID: 9146923940913162621}
-  minAngle: -86
-  maxAngle: 86
 --- !u!143 &643188641334919865
 CharacterController:
   m_ObjectHideFlags: 0
@@ -323,3 +254,20 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &5207310512466168424
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9146923942322307515}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ee29c8f868f46c689c285c752b10c41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movementSpeed: 8
+  jumpHeight: 6
+  playerCamera: {fileID: 9146923940913162621}
+  minAngle: -87
+  maxAngle: 87

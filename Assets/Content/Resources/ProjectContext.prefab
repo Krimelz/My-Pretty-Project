@@ -74,3 +74,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf4d90f0bf64f5e41a10c0fb9fce1490, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inputServicePrefab: {fileID: 3259140080584984428, guid: 3c1b5b9532a8e0847a5f8f707528e0df,
+    type: 3}
