@@ -1,23 +1,29 @@
-using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.AsyncOperations;
+using UnityEngine.ResourceManagement.ResourceProviders;
 using UnityEngine.SceneManagement;
-using UnityEngine.Serialization;
 
 namespace Codebase
 {
-    public class SceneLoader : MonoBehaviour
+	public class SceneLoader : MonoBehaviour
     {
-        [FormerlySerializedAs("_sceneName")] [SerializeField]
+        [SerializeField]
         private string sceneName;
 
-        private async void Start()
+		private async UniTaskVoid Start()
         {
-            AsyncOperation loading = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
+            var result = await LoadAsync();
+            await result.ActivateAsync();
+        }
 
-            while (loading.isDone)
-            {
-                await Task.Yield();
-            }
+        private async UniTask<SceneInstance> LoadAsync()
+		{
+            AsyncOperationHandle<SceneInstance> handle = 
+                Addressables.LoadSceneAsync(sceneName, LoadSceneMode.Additive, false);
+
+            return await handle;
         }
     }
 }
