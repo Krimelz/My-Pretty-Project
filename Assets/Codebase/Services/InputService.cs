@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace Codebase.Controls
+namespace Codebase.Services
 {
 	public class InputService : MonoBehaviour, IInputService
 	{

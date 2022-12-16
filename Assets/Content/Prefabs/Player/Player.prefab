@@ -212,6 +212,7 @@ GameObject:
   - component: {fileID: 9146923942322307492}
   - component: {fileID: 643188641334919865}
   - component: {fileID: 5207310512466168424}
+  - component: {fileID: 7558806502524326528}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -271,3 +272,17 @@ MonoBehaviour:
   playerCamera: {fileID: 9146923940913162621}
   minAngle: -87
   maxAngle: 87
+--- !u!114 &7558806502524326528
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9146923942322307515}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73d9d4e782e54418814efde54d354675, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  health: 100

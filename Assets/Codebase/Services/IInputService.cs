@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Codebase.Controls
+namespace Codebase.Services
 {
     public interface IInputService
     {

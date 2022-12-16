@@ -1,8 +1,8 @@
-using Codebase.Controls;
+using Codebase.Services;
 using UnityEngine;
 using Zenject;
 
-namespace Codebase
+namespace Codebase.Components
 {
     public class Player : MonoBehaviour
     {
