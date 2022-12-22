@@ -1,3 +1,4 @@
+using Codebase.Guns;
 using Codebase.Services;
 using UnityEngine;
 using Zenject;
@@ -19,9 +20,11 @@ namespace Codebase.Components
         private float minAngle = -87f;
         [SerializeField]
         private float maxAngle = 87f;
+        [Header("Fire")]
+        [SerializeField]
+        private Gun gun;
 
         private CharacterController _character;
-        private Vector3 _movementDirection;
         private Vector3 _velocity;
         private float _rotationX;
         private float _rotationY;
@@ -89,7 +92,7 @@ namespace Codebase.Components
 
         private void Fire()
         {
-            Debug.Log("Fire!");
+            gun.Shoot();
         }
 
         private void Gravity()

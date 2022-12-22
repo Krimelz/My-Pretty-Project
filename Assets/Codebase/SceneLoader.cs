@@ -15,7 +15,10 @@ namespace Codebase
 		private async UniTaskVoid Start()
         {
             var result = await LoadAsync();
-            await result.ActivateAsync();
+			await result.ActivateAsync();
+
+            var scene = SceneManager.GetSceneByName(sceneName);
+            SceneManager.SetActiveScene(scene);
         }
 
         private async UniTask<SceneInstance> LoadAsync()
