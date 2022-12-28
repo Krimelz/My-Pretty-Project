@@ -4,7 +4,7 @@ namespace Codebase.Guns
     {
         public override void Shoot()
         {
-            base.Shoot();
+            
         }
     }
 }

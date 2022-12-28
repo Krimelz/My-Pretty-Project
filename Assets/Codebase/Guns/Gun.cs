@@ -11,16 +11,29 @@ namespace Codebase.Guns
 		[SerializeField]
 		private Projectile projectilePrefab;
 
-		private ObjectPool<Projectile> _objectPool;
+		protected ObjectPool<Projectile> _projectilePool;
 
 		private void Start()
 		{
-			_objectPool = new ObjectPool<Projectile>(CreateProjectile, GetProjectile, ReleaseProjectile, DestroyProjectile);
+			_projectilePool = new ObjectPool<Projectile>(
+				CreateProjectile, 
+				GetProjectile, 
+				ReleaseProjectile, 
+				DestroyProjectile
+			);
 		}
 
-		private void ReleaseProjectile(Projectile obj)
+		public virtual void Shoot()
 		{
-			obj.gameObject.SetActive(false);
+			_projectilePool.Get();
+		}
+
+		private Projectile CreateProjectile()
+		{
+			var obj = Instantiate(projectilePrefab);
+			obj.OnRelease += _projectilePool.Release;
+
+			return obj;
 		}
 
 		private void GetProjectile(Projectile obj)
@@ -31,23 +44,16 @@ namespace Codebase.Guns
 			obj.gameObject.SetActive(true);
 		}
 
-		private Projectile CreateProjectile()
+		private void ReleaseProjectile(Projectile obj)
 		{
-			var obj = Instantiate(projectilePrefab);
-			obj.OnRelease += _objectPool.Release;
-
-			return obj;
+			obj.ResetVelocity();
+			obj.gameObject.SetActive(false);
 		}
 
 		private void DestroyProjectile(Projectile obj)
 		{
-			obj.OnRelease -= _objectPool.Release;
+			obj.OnRelease -= _projectilePool.Release;
 			Destroy(obj);
-		}
-
-		public virtual void Shoot()
-		{
-			_objectPool.Get();
 		}
 	}
 }

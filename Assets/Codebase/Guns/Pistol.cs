@@ -4,7 +4,8 @@
 	{
 		public override void Shoot()
 		{
-			base.Shoot();
+			var projectile = _projectilePool.Get();
+			projectile.AddForce();
 		}
 	}
 }

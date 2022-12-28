@@ -3,36 +3,45 @@ using UnityEngine;
 
 namespace Codebase.Guns
 {
-	public class Projectile : MonoBehaviour
+	[RequireComponent(typeof(Rigidbody))]
+	public abstract class Projectile : MonoBehaviour
 	{
 		public event Action<Projectile> OnRelease;
 
 		[SerializeField]
-		private int damage;
+		protected int damage;
 		[SerializeField]
-		private float speed;
+		protected float speed;
 		[SerializeField]
-		private float lifeTime;
+		protected float lifeTime;
 
-		private float elapsedTime;
+		protected Rigidbody _rigidbody;
+
+		private float _elapsedTime;
+
+		public abstract void AddForce();
+
+		public void ResetVelocity()
+		{
+			_rigidbody.velocity = Vector3.zero;
+		}
+
+		private void Awake()
+		{
+			_rigidbody = GetComponent<Rigidbody>();
+		}
 
 		private void Update()
 		{
-			Move();
-
-			if (elapsedTime < lifeTime)
+			if (_elapsedTime < lifeTime)
 			{
-				elapsedTime += Time.deltaTime;
+				_elapsedTime += Time.deltaTime;
 			}
 			else
 			{
 				OnRelease?.Invoke(this);
+				_elapsedTime = 0f;
 			}
-		}
-
-		private void Move()
-		{
-			transform.Translate(Vector3.forward * speed * Time.deltaTime, Space.Self);
 		}
 	}
 }
